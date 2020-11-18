@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+
+<html>
+	<head>
+		<title>Register: Travel Experts</title>
+
+
+		<link rel="stylesheet" href="reset.css">
+		<link rel="stylesheet" href="styles.css">
+		<link rel="icon" href="images/icon.png" />
+		
+		<!-- Free to use icons from Font Awesome-->
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+		
+		<meta charset="UTF-8">
+		<meta name="description" content="Travel Agency" />
+		<meta name="keywords" content="flight, booking, travel, vacation" />
+		<meta name="author" content="Eric Biondic" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	</head>
+	
+	<body>
+	
+	<header>
+		<div class="titleContainer">
+			<img class="logo" src="images/logo.png" />
+			<h1>Welcome to Travel Experts</h1>
+		</div>
+	</header>
+	
+	<section>
+	
+	<div class="container">
+		<h1 style="text-align:center;">This page is currently under construction.<br>Thank you for your patience.</h1>
+	</div>
+	
+	<form method="POST" action="/bouncer.php" class="container" style="flex-direction:column; width:20%; padding: 15px;">
+			
+		<label for="registerButtonFName">Username: </label>
+			<input type="text" id="registerButtonUsername" name="username" required="required"/> 
+			<br />
+			
+		<label for="registerButtonPass">Password: </label> 
+			<input type="password" id="registerButtonPass" name="pass" required="required"/> 
+			<br />
+			
+		<label for="registerButtonFName">First Name: </label>
+			<input type="text" id="registerButtonFName" name="fname"/> 
+			<br />
+			
+		<label for="registerButtonSubscribe">Yes, I'd like to subscribe to learn about the latest deals: </label>
+			<input type="checkbox" id="registerButtonSubscribe" name="subscribe" checked="checked"/> 
+			
+		<fieldset id="registerRadioPayType">
+		  <legend> Payment Type: </legend>
+		  <label> <input type="radio" name="payType" value="Credit"> Credit </label>
+		  <label> <input type="radio" name="payType" value="Paypal"> Paypal </label>
+		</fieldset>	
+
+		<input type="submit" value="Register"/>
+	</form>
+		
+	</section>
+	
+	</body>
+</html>
