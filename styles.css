@@ -37,6 +37,7 @@ header {
 	background-color: rgba(255,255,255,.9);
 	border-radius: 15px;
 	padding: 0 25px;
+	margin: 5px;
 }
   
 .titleContainer > * {
@@ -70,18 +71,39 @@ p {
 
 .container {
 	display: flex;
+	flex-wrap: wrap;
 	padding: 15px;
-	justify-content: space-evenly;
-	width:66%;
+	justify-content: space-around;
+	width:80%;
+	margin: 0 auto 20px;
+	padding: 25px 0;
 	background-color: rgba(255,255,255,.6);
 	border-radius: 15px;
+}
+
+.photoContainer{
+	display: flex;
+	flex-wrap: wrap;
+	padding: 15px;
+	justify-content: space-around;
+	width:80%;
 	margin: 0 auto 20px;
 	padding: 25px 0;
 }
 
-.photoContainer > * {
-	max-width:30%;
+.photoContainer img {
+	max-width:300px;
+	min-width: 150px;
+	height:auto;
+	margin: 25px;
 }
+
+.imgCard{
+	background-color: rgba(255,255,255,.6);
+	border-radius: 15px;
+	margin: 10px;
+}
+
 
 .contactContainer{
 	flex-direction:column;

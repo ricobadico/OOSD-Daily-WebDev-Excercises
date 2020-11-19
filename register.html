@@ -62,8 +62,8 @@
 				<br />
 				
 			<label for="registerButtonSubscribe">Yes, I'd like to subscribe to learn about the latest deals: <input type="checkbox" id="registerButtonSubscribe" name="subscribe" /> </label>
-				
-			<button type="button" name="submit" onclick="confirmer(submitForm,this.name)">Register</button>
+
+			<button type="button" name="register" onclick=confirmer(submitForm,this.name)>Register</button>
 			
 			<button type="button" name="reset" onclick=confirmer(resetForm,this.name)>Reset</button> 
 		
@@ -91,7 +91,7 @@
 							return false; //leave function without getting to submit
 					}
 				}
-				document.getElementById("registerForm").submit(); //points to the form and tells it to submit			 
+				const myform = document.getElementById("registerForm").submit(); //points to the form and tells it to submit			 
 			}
 
 			function resetForm(){
