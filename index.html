@@ -15,6 +15,29 @@
 		<meta name="keywords" content="flight, booking, travel, vacation" />
 		<meta name="author" content="Eric Biondic" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	
+		<!-- Array Script -->
+		<script>
+			const imageArray = [
+				{
+					desc: "Maligne Sunset",
+					src: "images/maligne2.png"
+				},
+				{
+					desc: "Vigilant Chrome Bear",
+					src: "images/chromebear.png"
+				},
+				{
+					desc: "West Japan",
+					src: "images/lethbridge.png"
+				},
+				{
+					desc: "Wee Mountaineer",
+					src: "images/chip.png"
+				}
+			];
+		</script>
+
 	</head>
 	
 	<body>
@@ -38,6 +61,15 @@
 				<img src="images/louise.jpg" />
 			</div>
 		</div>
+
+		<div class="container">
+			<script>
+				for(image of imageArray){
+					document.write('<img src=' + image.src + ' alt=' + image.desc + ' /> <p>' + image.desc + '</p>');
+				}
+			</script>
+		</div>
+		
 		
 		<div class="container" style="width:35%; padding: 20px 0 0;">
 			<a href="contact.html">
