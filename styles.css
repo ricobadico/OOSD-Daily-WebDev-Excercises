@@ -132,6 +132,13 @@ form input {
 	opacity: 50%;
 }
 
+.inputTip {
+	display:none; /* Default view turned off on input focus */
+	margin: 0;
+	font-size: x-small;
+	font-style: italic;
+}
+
 form button {
 	border: none;
 	background-color: #e7507e;

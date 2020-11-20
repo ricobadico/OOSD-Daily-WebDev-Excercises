@@ -50,6 +50,7 @@
 	</header>
 	
 	<section>
+		
 		<div class="photoContainer">
 			<div class="imgCard">
 				<img src="images/maligne.jpg" />
@@ -67,9 +68,9 @@
 			<script>
 				for(image of imageArray){
 					//Each item in imageArray gets its own container div with mouseover
-					document.write('<div class="imgCard" onmouseover=showImage(this)>')
+					document.write('<div class="imgCard" onmouseenter=showImage(this) onmouseleave=hideImage(this)>')
 					//Then within that div loads the image but sets its display to none, along with a description
-					document.write('<img src=' + image.src + ' alt="' + image.desc + '" style="display:none"/>'
+					document.write('<img src=' + image.src + ' alt="' + image.desc + '" style="display:none"; />'
 						+ '<p>' + image.desc + '</p>'); 
 					document.write('</div>')
 				}
@@ -99,6 +100,20 @@
 		function showImage(targetNode){
 			innerImage = targetNode.querySelector("img"); //since rollover is on entire container, need to get img within
 			innerImage.style.display = "block"; //set display from default none
+
+			innerImage.animate([ 
+				{ // from
+					opacity: 0,
+				}, 
+				{ // to
+					opacity: 1,
+				}
+				], 1000);
+		}
+
+		function hideImage(targetNode){
+			innerImage = targetNode.querySelector("img"); //since rollover is on entire container, need to get img within
+			innerImage.style.display = "none"; //set display from default none
 		}
 	</script>
 

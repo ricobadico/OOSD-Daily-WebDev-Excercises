@@ -32,33 +32,47 @@
 		</div>
 		
 		<form method="POST" action="/bouncer.php" class="container" id="registerForm" style="flex-direction:column; width:20%; padding: 15px;">
-				
+			
 			<label for="registerButtonEmail">Email: </label>
-				<input type="text" id="registerButtonEmail" name="email" required="required"/> 
+				<p class="inputTip">Please provide a valid email address.</p>
+				<input type="text" id="registerButtonEmail" name="email" 
+					onfocus=showInputTip(this)  onblur=hideInputTip(this) required="required"/> 
 				<br />
-				
+			
 			<label for="registerButtonPass">Password: </label> 
-				<input type="password" id="registerButtonPass" name="password" required="required"/> 
+			<p class="inputTip">Please provide a valid password.</p>
+				<input type="password" id="registerButtonPass" name="password" 
+					onfocus=showInputTip(this) onblur=hideInputTip(this) required="required"/> 
 				<br />
-				
+
 			<label for="registerButtonName">Name: </label>
-				<input type="text" id="registerButtonName" name="name" required="required"/> 
+			<p class="inputTip">Please provide [Firstname Lastname].</p>	
+				<input type="text" id="registerButtonName" name="name" 
+					onfocus=showInputTip(this) onblur=hideInputTip(this) required="required"/> 
 				<br />
 
 			<label for="registerButtonAddress">Address: </label>
-				<input type="text" id="registerButtonAddress" name="address" required="required"/> 
+			<p class="inputTip">Please provide address in the format [(Unit#) Street# Streetname].</p>
+				<input type="text" id="registerButtonAddress" name="address" 
+					onfocus=showInputTip(this) onblur=hideInputTip(this) required="required"/> 
 				<br />
 			
 			<label for="registerButtonCity">City: </label>
-				<input type="text" id="registerButtonCity" name="city" required="required"/> 
+			<p class="inputTip">Please provide your city.</p>
+				<input type="text" id="registerButtonCity" name="city" 
+					onfocus=showInputTip(this) onblur=hideInputTip(this) required="required"/> 
 				<br />
 
 			<label for="registerButtonProvince">Province: </label>
-				<input type="text" id="registerButtonProvince" name="province" required="required"/> 
+			<p class="inputTip">Please provide the full name of your province.</p>
+				<input type="text" id="registerButtonProvince" name="province" 
+					onfocus=showInputTip(this) onblur=hideInputTip(this) required="required"/> 
 				<br />
 
 			<label for="registerButtonPostalCode">Postal Code: </label>
-				<input type="text" id="registerButtonPostalCode" name="postalCode" required="required"/> 
+			<p class="inputTip">Please provide a postal code in the form A1A1A1.</p>
+				<input type="text" id="registerButtonPostalCode" name="postalCode" 
+					onfocus=showInputTip(this) onblur=hideInputTip(this) required="required"/> 
 				<br />
 				
 			<label for="registerButtonSubscribe">Yes, I'd like to subscribe to learn about the latest deals: <input type="checkbox" id="registerButtonSubscribe" name="subscribe" /> </label>
@@ -94,13 +108,23 @@
 				const myform = document.getElementById("registerForm").submit(); //points to the form and tells it to submit			 
 			}
 
-			function resetForm(){
+			function resetForm() {
 				const registerInputs = document.getElementById("registerForm").querySelectorAll("input") //Gets all input elements inside the form
 				for(input of registerInputs){ //iterates through each input
 					if(input.type != "submit"){ //ignores submit button (which uses "value" for its label!)
 						input.value = null; //blanks value
 					}
 				}
+			}
+
+			function showInputTip(currentInput){
+				inputTip = currentInput.previousElementSibling;
+				inputTip.style.display = "block";
+			}
+
+			function hideInputTip(currentInput){
+				inputTip = currentInput.previousElementSibling;
+				inputTip.style.display = "none";
 			}
 
 		</script>
