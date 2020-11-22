@@ -41,6 +41,23 @@
 	</head>
 	
 	<body>
+
+	<!-- Thanks to Ihatetomatoes at https://youtu.be/blHZ6zCYvMM for help with structuring preloader -->
+	<div class="introWrap">
+		<div class="loadWrap">
+			<img class="loadLogo" src="images/sunlogo_animated (1).svg" alt="Logo animation courtesy of Vivus" />
+			<p class="loadLabel">Loading..</p>
+
+			<img class="planeAnimation" src="images/air6 by tsaoja.svg" alt="" />
+
+			<div class="loadRevealer revealTop" ></div>                    
+			<div class="loadRevealer revealBottom" ></div>
+
+			<img class="introSplash" src="images/mizrach-beach.jpg" alt="" />
+			<h1 class="introText">Live. Your Way</h1>
+
+		</div>
+	 </div>   
 	
 	<header>
 		<div class="titleContainer">
@@ -63,7 +80,7 @@
 			</div>
 		</div>
 
-		<h1>Trip of the Day: Majestic Southern Alberta</h1>
+		<h1 style="margin: 0 auto;">Trip of the Day: Majestic Southern Alberta</h1>
 
 		<div class="photoContainer"
 			style="flex-direction:column; margin: 0 auto; align-items: center;">
@@ -98,6 +115,8 @@
 	</section>
 	
 	<script>
+
+		
 		//Makes array of images visible on rollover
 		function showImage(targetNode){
 			innerImage = targetNode.querySelector("img"); //since rollover is on entire container, need to get img within
@@ -117,6 +136,17 @@
 			innerImage = targetNode.querySelector("img"); //since rollover is on entire container, need to get img within
 			innerImage.style.display = "none"; //set display from default none
 		}
+
+		// Loader function - once everything above has loaded, this function calls a 3 second timer then adds load class to body, triggering animations 
+		setTimeout(function(){
+			const body = document.getElementsByTagName('body')[0];
+				body.classList.add("loaded");
+		}, 3000)
+		setTimeout(function(){ //A second timer brings the window back to the top just before the page reveals, to counter random scroll flailing
+			window.scrollTo(0,0);
+		},8400);
+
+
 	</script>
 
 	</body>
