@@ -16,6 +16,36 @@
 		<meta name="keywords" content="flight, booking, travel, vacation" />
 		<meta name="author" content="Eric Biondic" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	
+		<script>
+			//Contact Data - will eventually be sent from database. Will load entire needed array early so that individual calls to the db aren't needed when user interacting with page
+			const contactDataArray = [
+				{
+					id: 0,
+					address: "2839 Sweet Wing Avenue, Calgary, AB, T2M3M3",
+					phoneNo: "587-831-2033",
+					email: 'office@travelexperts.com',
+					image: "images/officebuilding.jpg"
+				},
+				{
+					id: 1,
+					name: "Margherite Vallandra",
+					title: "Service Lead",
+					phoneNo: "587-831-2033 ext. 273",
+					email: 'marvallan@travelexperts.com',
+					image: "images/businesswoman.jpg"
+				},
+				{
+					id: 2,
+					name: "Vijay Pathaka",
+					title: "Sales Representative",
+					phoneNo: "587-831-2033 ext. 539",
+					email: 'vpartha@travelexperts.com',
+					image: "images/rishigangoly.jpg"
+				}
+			]
+		</script>
+
 	</head>
 	
 	<body>
@@ -30,25 +60,100 @@
 	<section>
 	
 	<div class="container contactContainer">
-		<h1>Contact Us</h1>
-		<p>Main Office</p>
-		<ul>
-			<li>Office Address: 2839 Sweet Wing Avenue, Calgary, AB, T2M3M3</li>
-			<li>Phone Number: 587-831-2033</li>
-			<li>Email: <a href="mailto:office@travelexperts.com">office@travelexperts.com</a></li>
-		</ul>
-		<p>Margherite Vallandra, Service Lead</p>
-		<ul>
-			<li>Phone Number: 587-831-2033 ext. 273</li>
-			<li>Email: <a href="mailto:marvallan@travelexperts.com">marvallan@travelexperts.com</a></li>
-		</ul>
-		<p>Vijay Parthak, Sales Representative</p>
-		<ul>
-			<li>Phone Number: 587-831-2033 ext. 539</li>
-			<li>Email: <a href="mailto:vpartha@travelexperts.com">vpartha@travelexperts.com</a></li>
-		</ul>
+
+		<h1 class="contactTitle">Contact Us</h1>
+
+		<div class="contactOptions">
+			<h2 data-contact-id=0 onmouseenter=fadeThenDo(this,showContact)>Main Office</h2>
+			<h2 data-contact-id=1 onmouseenter=fadeThenDo(this,showContact)>Margherite Vallandra, Service Lead</h2>
+			<h2 data-contact-id=2 onmouseenter=fadeThenDo(this,showContact)>Vijay Pathak, Sales Representative</h2>
+		</div>
+
+		<div id="contactDetailsContainer" data-currentID=0>
+			<img id="contactImage" src="images/officebuilding.jpg" alt="our office" />
+			<ul id="contactDetailsRoot">
+				<li>Office Address: </li>
+				<li>Phone Number: </li>
+				<li>Email:</li>
+			</ul>
+		</div>
 	</div>
 		
+	<script>
+
+		// This lets a fadeout transition occur and finish before the function starts changing values
+		function fadeThenDo(targetNode, callback){
+
+			// Grab needed data --- for encapsulation sake, this should probably be in the below, but is up here also
+			const targetID = targetNode.dataset.contactId; // Grab corresponding ID, which is stored in a custom data-id attribute. Note that html "name-format" becomes js "nameFormat"
+			let contactData = findDetailMatch(contactDataArray, targetID); //runs a function to grab the right data
+
+			detailsContainer = document.getElementById("contactDetailsContainer");
+			if(contactData.id != detailsContainer.dataset.currentID) { //we only want to do this if a different contact is chosen
+				
+				//Fade items out for prettier transiton, toggling fadein/fadeout animation classes
+				for(childNode of detailsContainer.children){
+					childNode.classList.remove("fadein"); 
+					childNode.classList.add("fadeout");
+				}
+				setTimeout(callback, 300, contactData);
+			}
+		}
+
+		// This displays the relevant contact information based on the moused over contact
+		function showContact(contactData){
+			const detailsRoot = document.getElementById("contactDetailsRoot"); // this is where the details will go
+			const contactImage = document.getElementById("contactImage");
+
+			// Set container's currentID attribute to the contact being written (this stops it from repeating the process if already shown)
+			document.getElementById("contactDetailsContainer").dataset.currentID = contactData.id;
+
+			// Wipe ul's list items to get a blank slate (this allows for different number of <li> based on data pulled)
+			detailsRoot.textContent = "";
+
+			// Create new details based on given data
+			for(let [key, value] of Object.entries(contactData)){ //iterate through each detail
+				if(key != "id" && key != "image") { //ignore id and image, not part of list
+					let elemNode = document.createElement("li");
+					let textNode = document.createTextNode(`${key.toUpperCase()}: ${value}`); 
+					elemNode.appendChild(textNode);
+					detailsRoot.appendChild(elemNode);
+				}
+			}
+
+			//this updates the image, then waits until it is fully loaded to add the fade-in animation
+			updateImage(contactImage, contactData.image)
+    		.then(() => {
+				for(childNode of document.getElementById("contactDetailsContainer").children){
+					childNode.classList.remove("fadeout");
+					childNode.classList.add("fadein");
+					}
+			});
+		}
+
+		// Function that updates a photo image, then waits for it to load
+		async function updateImage(targetImg, newSrc){
+			return new Promise((resolve, reject) => {
+				targetImg.setAttribute("src", newSrc);
+				targetImg.onload = () => resolve(targetImg);
+				targetImg.addEventListener('error', () => {
+				reject(new Error(`Failed to load image's URL: ${newSrc}`));
+      			});
+   			});
+		}
+
+		// Search through each element of an array for one with a corresponding id value
+		function findDetailMatch(searchArray, searchID) {
+			for(entry of searchArray){ 
+				if(entry.id == searchID){
+					return entry; // give back that entry
+				}
+			}
+			return false; // return false if no such entry found
+		}
+
+	</script>
+
 	</section>
 	
 	</body>
