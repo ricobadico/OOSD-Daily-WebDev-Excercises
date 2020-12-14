@@ -6,18 +6,19 @@
 		<link rel="stylesheet" href="reset.css">
 		<link rel="stylesheet" href="styles.css">
 		<link rel="icon" href="images/icon.png" />
-		
-		<!-- Free to use icons from Font Awesome-->
-		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-		
+			
 		<meta charset="UTF-8">
 		<meta name="description" content="Travel Agency" />
 		<meta name="keywords" content="flight, booking, travel, vacation" />
 		<meta name="author" content="Eric Biondic" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 	
-		<!-- Array Script -->
+		<!-- Data Arrays -->
 		<script>
+			
+			// I used an array of objects rather than two arrays so as to keep a tighter link between data -
+			// I hope that is alright for the assignment. I did keep the day 7 excercise's array separate,
+			// to showcase working with multiple arrays
 			const imageArray = [
 				{
 					desc: "Maligne Sunset",
@@ -36,13 +37,20 @@
 					src: "images/chip.JPG"
 				}
 			];
+
+			const linkArray= [
+				"https://www.travelalberta.com/ca/listings/moraine-lake-1209/",
+				"https://jetsetterssuitcase.com/number-1-attraction-in-banff-alberta-the-gondola-ride/",
+				"https://www.nikkayuko.com/",
+				"https://video.nationalgeographic.com/video/news/0000014d-e33c-d8b5-af7f-f7fd36830000"
+			];
 		</script>
 
-	</head>
+</head>
 	
-	<body>
-
-	<!-- Thanks to Ihatetomatoes at https://youtu.be/blHZ6zCYvMM for help with structuring preloader -->
+<body>
+	
+	<!--Preloader-  Thanks to Ihatetomatoes at https://youtu.be/blHZ6zCYvMM for help with initial structuring -->
 	<div class="introWrap">
 		<div class="loadWrap">
 			<img class="loadLogo" src="images/sunlogo_animated (1).svg" alt="Logo animation courtesy of Vivus" />
@@ -55,19 +63,24 @@
 
 			<img class="introSplash" src="images/mizrach-beach.jpg" alt="" />
 			<h1 class="introText">Live. Your Way</h1>
-
 		</div>
 	 </div>   
 	
+	 <!-- Header -->
 	<header>
-		<div class="titleContainer">
-			<img class="logo" src="images/logo.png" />
-		<h1>Welcome to Travel Experts</h1>
-		</div>
+		<a href="index.html">
+			<div class="titleContainer">
+				<img class="logo" src="images/logo.png" />
+				<h1>Welcome to Travel Experts</h1>
+			</div>
+		</a>
 	</header>
 	
+	<!-- Main Content -->
 	<section>
 		
+		<h2>Providing Albertans with all their travel needs.</h2>
+
 		<div class="photoContainer">
 			<div class="imgCard">
 				<img src="images/maligne.jpg" />
@@ -82,15 +95,17 @@
 
 		<h1 style="margin: 0 auto;">Trip of the Day: Majestic Southern Alberta</h1>
 
-		<div class="photoContainer"
-			style="flex-direction:column; margin: 0 auto; align-items: center;">
+		<!-- JS-Made Photo Containers -->
+		<div class="photoContainer smallPhotoContainer">
 			<script>
-				for(image of imageArray){
+				for(i in imageArray){
 					//Each item in imageArray gets its own container div with mouseover
 					document.write('<div class="imgCard" onmouseenter=showImage(this) onmouseleave=hideImage(this)>')
+
 					//Then within that div loads the image but sets its display to none, along with a description
-					document.write('<img src=' + image.src + ' alt="' + image.desc + '" style="display:none"; />'
-						+ '<p>' + image.desc + '</p>'); 
+					// The on-click openLink function receives the current index, as it is assumed to match the corresponding index of the separate linkArray entry
+					document.write(`<img src=${imageArray[i].src} alt=${imageArray[i].desc} style="display:none"; onclick=openLink(linkArray,${i}) />`
+						+ '<p>' + imageArray[i].desc + '</p>'); 
 					document.write('</div>')
 				}
 			</script>
@@ -114,39 +129,8 @@
 		
 	</section>
 	
-	<script>
-		
-		//Makes array of images visible on rollover
-		function showImage(targetNode){
-			innerImage = targetNode.querySelector("img"); //since rollover is on entire container, need to get img within
-			innerImage.style.display = "block"; //set display from default none
+	<!-- Main scripts for the page - put at the end so their loading doesn't impede page visual load -->
+	<script src="index.js"></script>
 
-			innerImage.animate([ 
-				{ // from
-					opacity: 0,
-				}, 
-				{ // to
-					opacity: 1,
-				}
-				], 1000);
-		}
-
-		function hideImage(targetNode){
-			innerImage = targetNode.querySelector("img"); //since rollover is on entire container, need to get img within
-			innerImage.style.display = "none"; //set display from default none
-		}
-
-		// Loader function - once everything above has loaded, this function calls a 3 second timer then adds load class to body, triggering animations 
-		setTimeout(function(){
-			const body = document.getElementsByTagName('body')[0];
-				body.classList.add("loaded");
-		}, 3000)
-		setTimeout(function(){ //A second timer brings the window back to the top just before the page reveals, to counter random scroll flailing
-			window.scrollTo(0,0);
-		},8400);
-
-
-	</script>
-
-	</body>
+</body>
 </html>

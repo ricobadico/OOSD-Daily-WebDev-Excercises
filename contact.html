@@ -50,13 +50,17 @@
 	
 	<body>
 	
+	<!-- Header -->
 	<header>
-		<div class="titleContainer">
-			<img class="logo" src="images/logo.png" />
-			<h1>Welcome to Travel Experts</h1>
-		</div>
+		<a href="index.html">
+			<div class="titleContainer">
+				<img class="logo" src="images/logo.png" />
+				<h1>Welcome to Travel Experts</h1>
+			</div>
+		</a>
 	</header>
 	
+	<!-- Main content -->
 	<section>
 	
 	<div class="container contactContainer">
@@ -71,7 +75,7 @@
 
 		<div id="contactDetailsContainer" data-currentID=0>
 			<img id="contactImage" src="images/officebuilding.jpg" alt="our office" />
-			<ul id="contactDetailsRoot">
+			<ul id="contactDetailsTextContainer">
 				<li>Office Address: </li>
 				<li>Phone Number: </li>
 				<li>Email:</li>
@@ -79,81 +83,8 @@
 		</div>
 	</div>
 		
-	<script>
-
-		// This lets a fadeout transition occur and finish before the function starts changing values
-		function fadeThenDo(targetNode, callback){
-
-			// Grab needed data --- for encapsulation sake, this should probably be in the below, but is up here also
-			const targetID = targetNode.dataset.contactId; // Grab corresponding ID, which is stored in a custom data-id attribute. Note that html "name-format" becomes js "nameFormat"
-			let contactData = findDetailMatch(contactDataArray, targetID); //runs a function to grab the right data
-
-			detailsContainer = document.getElementById("contactDetailsContainer");
-			if(contactData.id != detailsContainer.dataset.currentID) { //we only want to do this if a different contact is chosen
-				
-				//Fade items out for prettier transiton, toggling fadein/fadeout animation classes
-				for(childNode of detailsContainer.children){
-					childNode.classList.remove("fadein"); 
-					childNode.classList.add("fadeout");
-				}
-				setTimeout(callback, 300, contactData);
-			}
-		}
-
-		// This displays the relevant contact information based on the moused over contact
-		function showContact(contactData){
-			const detailsRoot = document.getElementById("contactDetailsRoot"); // this is where the details will go
-			const contactImage = document.getElementById("contactImage");
-
-			// Set container's currentID attribute to the contact being written (this stops it from repeating the process if already shown)
-			document.getElementById("contactDetailsContainer").dataset.currentID = contactData.id;
-
-			// Wipe ul's list items to get a blank slate (this allows for different number of <li> based on data pulled)
-			detailsRoot.textContent = "";
-
-			// Create new details based on given data
-			for(let [key, value] of Object.entries(contactData)){ //iterate through each detail
-				if(key != "id" && key != "image") { //ignore id and image, not part of list
-					let elemNode = document.createElement("li");
-					let textNode = document.createTextNode(`${key.toUpperCase()}: ${value}`); 
-					elemNode.appendChild(textNode);
-					detailsRoot.appendChild(elemNode);
-				}
-			}
-
-			//this updates the image, then waits until it is fully loaded to add the fade-in animation
-			updateImage(contactImage, contactData.image)
-    		.then(() => {
-				for(childNode of document.getElementById("contactDetailsContainer").children){
-					childNode.classList.remove("fadeout");
-					childNode.classList.add("fadein");
-					}
-			});
-		}
-
-		// Function that updates a photo image, then waits for it to load
-		async function updateImage(targetImg, newSrc){
-			return new Promise((resolve, reject) => {
-				targetImg.setAttribute("src", newSrc);
-				targetImg.onload = () => resolve(targetImg);
-				targetImg.addEventListener('error', () => {
-				reject(new Error(`Failed to load image's URL: ${newSrc}`));
-      			});
-   			});
-		}
-
-		// Search through each element of an array for one with a corresponding id value
-		function findDetailMatch(searchArray, searchID) {
-			for(entry of searchArray){ 
-				if(entry.id == searchID){
-					return entry; // give back that entry
-				}
-			}
-			return false; // return false if no such entry found
-		}
-
-	</script>
-
+	<script src="contact.js"></script>
+	
 	</section>
 	
 	</body>

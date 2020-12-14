@@ -41,7 +41,7 @@ h2 {
 
 	.loadLogo {
 		width: 30%;
-		min-width:350px;
+		min-width:300px;
 		z-index: 1500;
 	}
   
@@ -76,17 +76,18 @@ h2 {
 		position:fixed;
 		padding-right:100%;
 		width:200px;
+		top:50px;
+		height: 500px;
 		left:-200px;
-		z-index: 1100;
+		z-index: 21100;
 	}
 
 	.introSplash {
-		/* Code below keeps the image responsive and filling the page. Thanks to https://css-tricks.com/perfect-full-page-background-image/ */
+		/* Code below keeps the image responsive and filling the page.*/
 		position: fixed;
 		min-width: 100%;
-		
-		height:100%;
 		width: auto;
+		height:100%;
 	}
 
 	.introText {
@@ -217,10 +218,12 @@ p {
 	flex-wrap: wrap;
 	justify-content: space-around;
 	width:80%;
+	min-width:300px;
 	margin: 0 auto 20px;
 	padding: 25px 0;
 	background-color: rgba(255,255,255,.6);
 	border-radius: 15px;
+	margin: 0 auto;
 }
 
 .photoContainer{
@@ -239,6 +242,13 @@ p {
 	min-width: 150px;
 	height:auto;
 	margin: 25px;
+}
+
+.photoContainer.smallPhotoContainer {
+	flex: column wrap; 
+	margin: 0 auto; 
+	align-items: top;
+	height: 300px;
 }
 
 .imgCard{
@@ -297,14 +307,14 @@ p {
 	box-shadow: 5px 5px 3px rgba(0, 0, 0, 0.4);
 }
 
-#contactDetailsRoot {
+#contactDetailsTextContainer {
 	display: flex; 
 	flex-direction: column; 
 	justify-content: space-around;
 	min-height: 200px;
 }
 
-#contactDetailsRoot li{
+#contactDetailsTextContainer li{
 	color: rgba(255,189,89);
 	font-family:Helvetica;
 	text-shadow: 1px 1px 2px grey;
@@ -332,6 +342,12 @@ p {
 }
 
 /* Register Page */
+
+.registerTitle{
+	text-align:center;
+	margin: 0 auto 15px;
+}
+
 form input {
 	margin: 0 0 5px;
 	opacity: 50%;
